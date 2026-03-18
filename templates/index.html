@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI X-Ray Analysis System</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; }
+        .upload-section { text-align: center; padding: 30px; border: 2px dashed #3498db; border-radius: 10px; margin-bottom: 30px; }
+        input[type="file"] { display: none; }
+        .custom-file-upload { display: inline-block; padding: 12px 24px; cursor: pointer; background: #3498db; color: white; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .custom-file-upload:hover { background: #2980b9; }
+        .submit-btn { margin-top: 15px; padding: 10px 30px; background: #2ecc71; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+        .submit-btn:hover { background: #27ae60; }
+        .results { display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 30px; }
+        .result-card { background: #ecf0f1; border-radius: 8px; padding: 15px; width: 45%; text-align: center; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .result-card img { max-width: 100%; border-radius: 5px; margin-top: 10px; }
+        .diagnosis { text-align: center; font-size: 24px; font-weight: bold; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .normal { background: #d4efdf; color: #1e8449; border: 2px solid #27ae60; }
+        .abnormal { background: #fadbd8; color: #c0392b; border: 2px solid #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 AI-Driven X-Ray Analysis</h1>
+        <p style="text-align: center;">Upload an X-Ray image to automatically enhance quality and predict abnormalities.</p>
+        
+        <div class="upload-section">
+            <form action="/analyze" method="post" enctype="multipart/form-data">
+                <label class="custom-file-upload">
+                    <input type="file" name="file" accept="image/*" required onchange="document.getElementById('file-name').innerText = this.files[0].name;">
+                    Choose X-Ray Image
+                </label>
+                <div id="file-name" style="margin-top: 10px; font-style: italic;"></div>
+                <br>
+                <button type="submit" class="submit-btn" onclick="this.innerText='Analyzing...'">Analyze Image</button>
+            </form>
+        </div>
+
+        {% if error %}
+            <div style="color: red; text-align: center; font-weight: bold;">Error: {{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="diagnosis {% if prediction == 'NORMAL' %}normal{% else %}abnormal{% endif %}">
+                Diagnosis: {{ prediction }}<br>
+                <span style="font-size: 16px; font-weight: normal;">Confidence: {{ confidence }}</span>
+            </div>
+
+            <div class="results">
+                <div class="result-card">
+                    <h3>Enhanced Image 📸</h3>
+                    <p style="font-size: 14px; color: #7f8c8d;">Noise filtered & contrast adjusted</p>
+                    <img src="{{ enhanced_image }}" alt="Enhanced X-Ray">
+                </div>
+                <div class="result-card">
+                    <h3>AI Explainability (Grad-CAM) 🔍</h3>
+                    <p style="font-size: 14px; color: #7f8c8d;">Heatmap shows what the AI focused on</p>
+                    <img src="{{ gradcam_image }}" alt="Grad-CAM Heatmap">
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/" style="text-decoration: none; color: #3498db; font-weight: bold;">&larr; Analyze Another Image</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
