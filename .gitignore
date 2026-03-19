@@ -1,2 +1,17 @@
-__pycache__
-chest_xray
+# Data & Dataset
+data/
+chest_xray/
+
+# Model Weights (Large binary files)
+*.pth
+
+# Python specific
+__pycache__/
+*.pyc
+
+# IDEs & System
+.vscode/
+.idea/
+.DS_Store
+.env
+data

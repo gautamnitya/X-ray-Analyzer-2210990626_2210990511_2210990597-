@@ -16,9 +16,13 @@ st.set_page_config(
 # --- CUSTOM CSS ---
 st.markdown("""
 <style>
-    .main { background-color: #f0f2f6; }
     .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #3498db; color: white; }
-    .stMetric { background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    [data-testid="stMetricValue"] { font-size: 28px; }
+    .stMetric { 
+        padding: 15px; 
+        border-radius: 10px; 
+        border: 1px solid rgba(128, 128, 128, 0.2);
+    }
 </style>
 """, unsafe_allow_html=True)
 
