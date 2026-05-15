@@ -2,6 +2,10 @@
 
 Welcome to the AI-driven X-Ray Analysis System! This project walks you through building a complete, production-ready Machine Learning pipeline from scratch. It perfectly aligns with the techniques mentioned in our abstract: **Filtering, Contrast Adjustment (CLAHE), Edge Enhancement, and Normalization**, followed by a **Convolutional Neural Network (CNN)** for classification.
 
+| 👥 Team Details | 📄 Project Information |
+| :--- | :--- |
+| • **Nitya Gautam** (2210990626)<br>• **Nandini Bakshi** (2210990597)<br>• **Khushi Bansal** (2210990511) | We have done a research paper on this and the result is awaited. |
+
 ## 🚀 Features
 1. **End-to-end ML Pipeline**: Includes dataset loading, image enhancement, training, evaluation, and inference.
 2. **Transfer Learning**: Uses an industry-standard ResNet18 model framework for fast, >95% accurate predictions.
